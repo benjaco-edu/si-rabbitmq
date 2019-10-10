@@ -11,10 +11,12 @@ The RabbitMQ dashboard can now be viewed at `http://localhost:15672` user: guest
 
 # Run the server
 
-Run the server, and see some events come back for the bookings
+Run the server, and see some events come back for the bookings, give it a secound or 2 to start RabbitMQ
 
-`sudo docker run --link localrabbit:rabbitmq bslcphbussiness/si-rabbitmq node server.js`
+`sudo docker run --rm --link localrabbit:rabbitmq bslcphbussiness/si-rabbitmq node server.js`
 
+
+```
  [x] Sent offer for 14pm
  [x] Sent offer for 14pm
  [x] Sent offer for 12pm
@@ -22,14 +24,16 @@ Offer for offer for 12pm has been accepted
  [x] Sent offer for 14pm
  [x] Sent offer for 10pm
 Offer for offer for 10pm has been accepted
-
+```
 
 # And the client
 
 Run the client there accepts some events in a new window
 
-`sudo docker run --link localrabbit:rabbitmq bslcphbussiness/si-rabbitmq node client.js`
+`sudo docker run --rm --link localrabbit:rabbitmq bslcphbussiness/si-rabbitmq node client.js`
 
+
+```
  [x] Received offer for 14pm
 going to accept:  false
  [x] Received offer for 14pm
@@ -42,3 +46,11 @@ going to accept:  true
 going to accept:  false
  [x] Received offer for 10pm
 going to accept:  true
+```
+
+# Clean up
+
+```
+sudo docker rm -f localrabbit
+sudo docker rmi -f bslcphbussiness/si-rabbitmq 
+```
